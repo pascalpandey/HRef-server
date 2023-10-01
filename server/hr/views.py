@@ -7,13 +7,13 @@ import requests
 import os
 
 
-def download_and_save_pdf(request, s3_url):
-    response = requests.get(s3_url, stream=True)
+def download_and_save_pdf(url):
+    response = requests.get(url, stream=True)
 
     # Check if the request was successful (HTTP status code 200)
     if response.status_code == 200:
         # Get the filename from the URL
-        filename = s3_url.split("/")[-1]
+        filename = url.split("/")[-1]
 
         # Define the local path where you want to save the file
         local_path = os.path.join("path_to_local_directory", filename)
@@ -42,3 +42,8 @@ def employee(request):
         return Response(serializer.data)
     if request.method == 'POST':
         serializer = EmployeeSerializer(data=request.data)
+
+@api_view(['POST'])
+def resume(request):
+    if request.method == 'POST':
+        print(request.body)
