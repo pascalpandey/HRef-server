@@ -24,4 +24,5 @@ urlpatterns = [
     path("employees", views.employee),
     path("candidates/accept/<int:id>", views.acceptCandidate),
     path("candidates/reject/<int:id>", views.rejectCandidate),
+    path("seed", views.seedData)
 ]

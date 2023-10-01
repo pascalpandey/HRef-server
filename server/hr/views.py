@@ -3,6 +3,8 @@ from .serializers import CandidateSerializer, EmployeeSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Candidate, Employee
+from .build import upload_employee, employee_final
+from .inference import process
 import requests
 import os
 import shutil
@@ -98,3 +100,24 @@ def rejectCandidate(request, id):
 
     except Candidate.DoesNotExist:
         return Response({"message": "Candidate not found."}, status=404)
+
+@api_view(['POST'])
+def seedData(request):
+    employees = upload_employee(employee_final)
+    
+    # Create a list of Employee instances
+    employee_instances = []
+    
+    for employee_data in employees:
+        employee_instance = Employee(
+            color=employee_data['color'],
+            score=employee_data['score'],
+            x=employee_data['x'],
+            y=employee_data['y']
+        )
+        employee_instances.append(employee_instance)
+
+    # Bulk insert the Employee instances into the database
+    Employee.objects.bulk_create(employee_instances)
+
+    return Response({"message": "success."}, status=201)
