@@ -38,7 +38,10 @@ def candidate(request):
         pdfs_directory = os.path.join(base_dir, 'pdfs')
         data_points = process(pdfs_directory)
 
-        print(data_points)
+        for data in data_points:
+            print(data['x'], data['y'], data['color'], float(data['score']), data['keywords'][0][69:74], 'wow')
+            Candidate.objects.create(x=data['x'], y=data['y'], color=data['color'], score=float(data['score']), keywords=data['keywords'][0][69:74])
+
         shutil.rmtree(pdfs_directory)
         return Response("Success")
 

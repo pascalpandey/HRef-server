@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 ('color', models.CharField(max_length=255)),
                 ('resume_link', models.URLField()),
                 ('score', models.DecimalField(decimal_places=1, max_digits=3)),
-                ('x', models.IntegerField()),
-                ('y', models.IntegerField()),
+                ('x', models.FloatField()),
+                ('y', models.FloatField()),
             ],
         ),
         migrations.CreateModel(
@@ -33,8 +33,8 @@ class Migration(migrations.Migration):
                 ('color', models.CharField(max_length=255)),
                 ('resume_link', models.URLField()),
                 ('score', models.DecimalField(decimal_places=1, max_digits=3)),
-                ('x', models.IntegerField()),
-                ('y', models.IntegerField()),
+                ('x', models.FloatField()),
+                ('y', models.FloatField()),
             ],
         ),
     ]
