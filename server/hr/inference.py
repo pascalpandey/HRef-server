@@ -1,5 +1,5 @@
-from build import vectorizer, model, reducer_1, reducer_2, cluster_model
-from utils import full_parse, get_keywords
+from hr.build import vectorizer, model, reducer_1, reducer_2, cluster_model
+from hr.utils import full_parse, get_keywords
 import pandas as pd
 import os
 

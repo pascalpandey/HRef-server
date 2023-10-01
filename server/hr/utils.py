@@ -11,6 +11,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from pymystem3 import Mystem
 
+
 def parse_pdf(path):
     reader = PdfReader(path)
     page = reader.pages[0]
@@ -27,7 +28,7 @@ def remove_strange_char(documents):
 def make_tokenize(documents):
   return [doc.lower().split() for doc in documents]
 
-useless_words_path = "data/useless_words.csv"
+useless_words_path = "hr/data/useless_words.csv"
 
 useless_words = np.loadtxt(useless_words_path, delimiter=',', dtype='str')
 
@@ -58,14 +59,15 @@ def clean(df, col):
   return docs
 
 def init_vectorizer(path):
-  def dummy(doc):
-    return doc
+  # def dummy(doc):
+  #   return doc
   vectorizer=TfidfVectorizer(ngram_range=(1, 2), 
                              max_df=0.5,
                              min_df=0.05, 
-                             tokenizer=dummy,
+                            #  tokenizer=lambda a:a,
                              token_pattern=None, 
-                             preprocessor=dummy)
+                            #  preprocessor=lambda a:a
+                             )
   vectorizer = joblib.load(path)
   return vectorizer
 

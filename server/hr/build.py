@@ -1,13 +1,13 @@
-from utils import init_vectorizer, get_employee
-from model import score_predictor
+from hr.utils import init_vectorizer, get_employee
+from hr.model import score_predictor
 from sklearn.decomposition import PCA
 from sklearn.cluster import Birch
 import tensorflow as tf
 import pandas as pd
+import pickle
 
-
-vectorizer_path = 'data/vectorizer.pkl'
-employee_path = 'data/employee.csv'
+vectorizer_path = 'hr/data/vectorizer_2.pkl'
+employee_path = 'hr/data/employee.csv'
 
 def inference(n_components=1201):
     model = score_predictor(n_components)
