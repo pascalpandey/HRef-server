@@ -20,5 +20,5 @@ from hr import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("resume/", views)
+    # path("resume/", views)
 ]

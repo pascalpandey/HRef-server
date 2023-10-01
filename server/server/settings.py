@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hr",
-    'rest_framework',
-    'corsheaders',
+    'rest_framework', # pip install djangorestframework
+    'corsheaders', # pip install django-cors-headers
+    'requests' # pip install requests
 ]
 
 MIDDLEWARE = [

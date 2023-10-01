@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import Query, Output
+from .models import Candidate, Employee
 
 
-class QuerySerializer(serializers.ModelSerializer):
+class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Query
-        fields = ['query']
+        model = Candidate
+        fields = ['candidate']
 
 
-class OutputSerializer(serializers.ModelSerializer):
+class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Output
-        fields = ['output']
+        model = Employee
+        fields = ['employee']
