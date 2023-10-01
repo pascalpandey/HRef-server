@@ -21,5 +21,7 @@ from hr import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("candidates", views.candidate),
-    path("employees", views.employee)
+    path("employees", views.employee),
+    path("candidates/accept/<int:id>", views.acceptCandidate),
+    path("candidates/reject/<int:id>", views.rejectCandidate),
 ]

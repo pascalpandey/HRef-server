@@ -21,7 +21,6 @@ def download_and_save_pdf(url):
             for chunk in response.iter_content(1024):
                 file.write(chunk)
 
-
 @api_view(['GET', 'POST'])
 def candidate(request):
     if request.method == 'GET':
@@ -46,3 +45,44 @@ def employee(request):
             serializer.save() 
             return Response(status=201) 
         return Response(serializer.errors, status=400) 
+    
+# accept employee
+@api_view(['POST'])
+def acceptCandidate(request, id):
+    try:
+        candidate = Candidate.objects.get(id=id)
+        
+        Employee.objects.create(
+            id=candidate.id,
+            keywords=candidate.keywords,
+            color=candidate.color,
+            resume_link=candidate.resume_link,
+            score=candidate.score,
+            x=candidate.x,
+            y=candidate.y
+        )
+        
+        candidate.delete()
+
+        # retrain model here!
+
+        return Response({"message": "Candidate accepted and moved to employee table."}, status=201)
+    
+    except Candidate.DoesNotExist:
+        return Response({"message": "Candidate not found."}, status=404)
+
+# reject employee
+@api_view(['DELETE'])
+def rejectCandidate(request, id):
+    try:
+        candidate = Candidate.objects.get(id=id)
+        candidate.delete()
+        
+        # retrain model here!
+
+        return Response({"message": "Candidate rejected successfully"}, status=200)
+    
+    except Candidate.DoesNotExist:
+        return Response({"message": "Candidate not found."}, status=404)
+
+
