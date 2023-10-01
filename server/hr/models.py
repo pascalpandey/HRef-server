@@ -1,9 +1,7 @@
 from django.db import models
 
-from django.db import models
-
 class Candidate(models.Model):
-    name = models.CharField(max_length=255)
+    id = models.CharField(primary_key=True, max_length=255)
     keywords = models.JSONField(default=list)  # Store keywords as a JSON array
     color = models.CharField(max_length=255)
     resume_link = models.URLField()
@@ -12,10 +10,10 @@ class Candidate(models.Model):
     y = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.id
 
 class Employee(models.Model):
-    name = models.CharField(max_length=255)
+    id = models.CharField(primary_key=True, max_length=255)
     keywords = models.JSONField(default=list)
     color = models.CharField(max_length=255)
     resume_link = models.URLField()
@@ -24,4 +22,4 @@ class Employee(models.Model):
     y = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.id
