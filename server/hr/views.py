@@ -10,15 +10,13 @@ import os
 def download_and_save_pdf(url):
     response = requests.get(url, stream=True)
 
-    # Check if the request was successful (HTTP status code 200)
     if response.status_code == 200:
-        # Get the filename from the URL
         filename = url.split("/")[-1]
-
-        # Define the local path where you want to save the file
-        local_path = os.path.join("path_to_local_directory", filename)
-
-        # Save the file locally
+        base_dir = os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))) 
+        pdfs_directory = os.path.join(base_dir, 'pdfs')
+        os.makedirs(pdfs_directory, exist_ok=True)
+        local_path = os.path.join(pdfs_directory, filename)
         with open(local_path, 'wb') as file:
             for chunk in response.iter_content(1024):
                 file.write(chunk)
@@ -31,7 +29,9 @@ def candidate(request):
         serializer = CandidateSerializer(queries, many=True)
         return Response(serializer.data)
     if request.method == 'POST':
-        serializer = CandidateSerializer(data=request.data)
+        for url in request.data['data']:
+            download_and_save_pdf(url)
+        return Response("Success")
 
 # get employee
 @api_view(['GET', 'POST'])
