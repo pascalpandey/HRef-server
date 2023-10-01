@@ -33,7 +33,7 @@ def candidate(request):
     if request.method == 'POST':
         serializer = CandidateSerializer(data=request.data)
 
-
+# get employee
 @api_view(['GET', 'POST'])
 def employee(request):
     if request.method == 'GET':
@@ -42,8 +42,7 @@ def employee(request):
         return Response(serializer.data)
     if request.method == 'POST':
         serializer = EmployeeSerializer(data=request.data)
-
-@api_view(['POST'])
-def resume(request):
-    if request.method == 'POST':
-        print(request.body)
+        if serializer.is_valid():
+            serializer.save() 
+            return Response(status=201) 
+        return Response(serializer.errors, status=400) 
