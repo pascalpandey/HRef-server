@@ -26,10 +26,10 @@ def process(applicant_path):
         applicant_red = pd.concat([applicant_red, applicant_score], axis=1)
 
         applicant={'x': applicant_red.iloc[0,0], 'y':applicant_red.iloc[0,1], 
-            'cluster':applicant_red.iloc[0,2], 'score':applicant_red.iloc[0,3],
+            'color':applicant_red.iloc[0,2], 'score':applicant_red.iloc[0,3],
             'keywords':keywords}
 
         res.append(applicant)
       
-      
+
     return res
