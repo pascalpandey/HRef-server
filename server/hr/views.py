@@ -32,10 +32,11 @@ def candidate(request):
     if request.method == 'POST':
         for url in request.data['data']:
             download_and_save_pdf(url)
-        data_points = process("server\pdfs")
-        print(data_points)
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         pdfs_directory = os.path.join(base_dir, 'pdfs')
+        data_points = process(pdfs_directory)
+
+        print(data_points)
         shutil.rmtree(pdfs_directory)
         return Response("Success")
 
